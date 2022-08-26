@@ -7,6 +7,8 @@ const port = 3000;
 //Habilitando Pug 
 app.set("view engine", "pug");
 app.set("views", "./views");
+// Carpeta publica
+app.use(express.static('public'))
 
 //Routing
 app.use('/auth', usuarioRoutes);
