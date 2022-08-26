@@ -1,0 +1,34 @@
+{
+  "name": "bienes-raices",
+  "version": "1.0.0",
+  "description": "Proyecto con NodeJS",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "server": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EslebanPerez/NodeJSBienesRaices.git"
+  },
+  "keywords": [
+    "Tailwind",
+    "Pug",
+    "MVC",
+    "Sequelize",
+    "Mysql"
+  ],
+  "author": "Esleban Perez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EslebanPerez/NodeJSTemplateString/issues"
+  },
+  "homepage": "https://github.com/EslebanPerez/NodeJSTemplateString#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
