@@ -2,9 +2,24 @@ extends ../layout/index
 
 block contenido
     div.py-10
-        h1.text-4xl.my-10.font-extrabold.text-center Bienes 
+        h1.text-4xl.my-5.font-extrabold.text-center Bienes 
             span.font-normal Raices
         h2.text-center.text-2xl.font-extrabold=title
-        
-        div.mt-8
-    
+
+        div(class =" mt-8 mx-auto max-w-md")
+            div.bg-white.py-8.px-4.shadow
+                form.space-y-5
+                    div
+                        label(for= "name",class = "block text-sm text-gray-700 uppercase font-bold mb-1 " ) Nombre
+                        input(type="text", name="name", placeholder="Nombre", class="font-normal w-full px-3 py-3 text-gray-400 border rounded-md shadow appearance-none focus:outline-1 focus:outline-lime-200 focus:bg-lime-50 focus:shadow-outline")
+                    div    
+                        label(for= "emal",class = "block text-sm text-gray-700 uppercase font-bold mb-1 " ) Email
+                        input(type="email", name="emal", placeholder="Email", class="w-full px-3 py-3 text-gray-400 border rounded-md shadow appearance-none focus:outline-1 focus:outline-lime-200 focus:bg-lime-50 focus:shadow-outline")
+                    div        
+                        label(for= "password",class = "block text-sm text-gray-700 uppercase font-bold mb-1 " ) Contraseña
+                        input(type="password", name="password", placeholder="Contraseña", class="w-full px-3 py-3 text-gray-400 border-md rounded shadow appearance-none focus:outline-1 focus:outline-lime-200 focus:bg-lime-50 focus:shadow-outline")
+                    div        
+                        label(for= "repetirPassword",class = "block text-sm text-gray-700 uppercase font-bold mb-1 " ) Repetir Contraseña
+                        input(type="password", name="repetirPassword", placeholder="Repetir contraseña", class="w-full px-3 py-3 text-gray-400 border-md rounded shadow appearance-none focus:outline-1 focus:outline-lime-200 focus:bg-lime-50 focus:shadow-outline")
+
+                    input(type="submit", value="Registrarse", class="w-full px-3 py-3 text-white font-bold tracking-wide uppercase cursor-pointer bg-lime-400 border-0 rounded-md shadow hover:bg-lime-600 focus:outline-1 focus:outline-lime-200 focus:bg-lime-50 focus:shadow-outline")    

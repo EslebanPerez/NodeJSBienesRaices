@@ -1,6 +1,6 @@
 const formularioLogin = ( req, res )=>{
     res.render('auth/login',{
-        title : "Ingresar"
+        title : "Iniciar Sesión"
     });
 }
 const formularioRegistro = ( req, res )=>{
