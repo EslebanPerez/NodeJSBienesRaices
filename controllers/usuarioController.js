@@ -8,8 +8,14 @@ const formularioRegistro = ( req, res )=>{
         title : "Crear cuenta"
     });
 }
+const forgotPassword = ( req, res )=>{
+    res.render('auth/password',{
+        title : "¿Olvidaste tu contraseña?"
+    });
+}
 
 export { 
     formularioLogin, 
-    formularioRegistro 
+    formularioRegistro, 
+    forgotPassword
 }
