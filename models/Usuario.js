@@ -15,6 +15,6 @@ const Usuario = db.define('usuarios',{
         allowNull: false
     },
     token:  DataTypes.STRING,
-    confirmamdo: DataTypes.BOOLEAN
+    confirmado: DataTypes.BOOLEAN
 })
  export default Usuario;
