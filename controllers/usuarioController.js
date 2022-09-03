@@ -15,10 +15,21 @@ const registrar = async ( req, res )=>{
     await check ("username").notEmpty().withMessage('El nombre es obligatorio').run(req);
     await check ("email").isEmail().withMessage('Eso no parece un email').run(req);
     await check ("password").isLength({ min: 6 }).withMessage('La contraseña debe ser de al menos 6 caracteres').run(req);
-    await check ("repetirPassword").equals("password").withMessage('Las contraseñas no coinciden').run(req);
+    await check ("repetirPassword").equals(req.body.password).withMessage('Las contraseñas no coinciden').run(req);
     let resultado = validationResult(req);
 
-    res.json(resultado.array());
+    console.log(resultado);
+    // Verificar que el resultado este vacio
+    if(!resultado.isEmpty()){
+        return res.render('auth/registro',{
+            title : "Crear cuenta",
+            errores: resultado.array(),
+            usuario: {
+                username: req.body.username,
+                email: req.body.email
+            }
+        });
+    }
 
     const usuario = await Usuario.create(req.body);
     res.json(usuario);
