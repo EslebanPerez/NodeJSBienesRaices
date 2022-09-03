@@ -1,3 +1,4 @@
+import { request } from "express";
 import {check, validationResult} from "express-validator"
 import Usuario from "../models/Usuario.js";
 
@@ -30,6 +31,23 @@ const registrar = async ( req, res )=>{
             }
         });
     }
+
+    //Extraer los datos
+    const { nombre, email, password } = req.body;
+    // Verificar que el usuario no este duplicado
+    const existeUsuario = await Usuario.findOne({ where: { email } })
+    if (existeUsuario){
+        return res.render('auth/registro',{
+            title : "Crear cuenta",
+            errores: [{msg: 'El email ya ha sido registrado'}],
+            usuario: {
+                username: req.body.username,
+                email: req.body.email
+            }
+        });
+    }
+    console.log(existeUsuario);
+    return;
 
     const usuario = await Usuario.create(req.body);
     res.json(usuario);
