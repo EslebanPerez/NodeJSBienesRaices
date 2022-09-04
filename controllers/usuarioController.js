@@ -54,12 +54,21 @@ const registrar = async ( req, res )=>{
         password,
         token: generarID(),
     });
-    res.json(usuario);
+
+    // Mostrar mensaje de confirmación
+    res.render('templates/mensaje',{
+        title: 'Cuenta creada correctamente',
+        mensaje: 'Revisa tu correo para confirmar tu cuenta 😉'
+    })
+
 }
+
 const forgotPassword = ( req, res )=>{
     res.render('auth/password',{
         title : "¿Olvidaste tu contraseña?"
     });
+    
+    res.json(usuario);
 }
 
 export { 
