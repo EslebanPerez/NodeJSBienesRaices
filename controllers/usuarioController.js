@@ -33,7 +33,7 @@ const registrar = async ( req, res )=>{
     }
 
     //Extraer los datos
-    const { nombre, email, password } = req.body;
+    const { username, email, password } = req.body;
     // Verificar que el usuario no este duplicado
     const existeUsuario = await Usuario.findOne({ where: { email } })
     if (existeUsuario){
@@ -46,10 +46,13 @@ const registrar = async ( req, res )=>{
             }
         });
     }
-    console.log(existeUsuario);
-    return;
-
-    const usuario = await Usuario.create(req.body);
+    //Almacenar usuario
+    const usuario = await Usuario.create({
+        username,
+        email,
+        password,
+        token: 123456,
+    });
     res.json(usuario);
 }
 const forgotPassword = ( req, res )=>{
