@@ -3,7 +3,7 @@ import usuarioRoutes from "./routes/usuarioRoutes.js"
 import db from "./config/db.js"
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 //Habilitar lectura de datos de formularios
 app.use(express.urlencoded({extended: true}))
