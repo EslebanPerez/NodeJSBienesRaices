@@ -102,8 +102,24 @@ const forgotPassword = ( req, res )=>{
     res.render('auth/password',{
         title : "¿Olvidaste tu contraseña?"
     });
+}
+
+const resetPassword = async (req, res) =>{
+    await check ("email").isEmail().withMessage('Eso no parece un email').run(req);
+    let resultado = validationResult(req);
+
+    //console.log(resultado);
+    // Verificar que el resultado este vacio
+    if(!resultado.isEmpty()){
+        return res.render('auth/password',{
+            title : "Crear cuenta",
+            errores: resultado.array()
+        });
+    }
+
+    //Buscar el usuario
     
-    res.json(usuario);
+
 }
 
 export { 
@@ -111,5 +127,6 @@ export {
     formularioRegistro, 
     registrar,
     confirmar,
-    forgotPassword
+    forgotPassword,
+    resetPassword
 }
