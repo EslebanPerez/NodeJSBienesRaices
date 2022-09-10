@@ -2,7 +2,7 @@ import { request } from "express";
 import {check, validationResult} from "express-validator"
 import Usuario from "../models/Usuario.js";
 import { generarID } from "../helpers/tokens.js"
-import { emailRegistro } from "../helpers/emails.js" 
+import { emailRegistro, emailOlvidePassword } from "../helpers/emails.js" 
 
 const formularioLogin = ( req, res )=>{
     res.render('auth/login',{
@@ -99,7 +99,7 @@ const confirmar = async (req, res) => {
 }
 
 const forgotPassword = ( req, res )=>{
-    res.render('auth/password',{
+    res.render('auth/forgot-password',{
         title : "¿Olvidaste tu contraseña?"
     });
 }
@@ -111,7 +111,7 @@ const resetPassword = async (req, res) =>{
     //console.log(resultado);
     // Verificar que el resultado este vacio
     if(!resultado.isEmpty()){
-        return res.render('auth/password',{
+        return res.render('auth/forgot-password',{
             title : "¿Olvidaste tu contraseña?",
             errores: resultado.array()
         });
@@ -121,12 +121,33 @@ const resetPassword = async (req, res) =>{
     const { email } = req.body;
     const usuario = await Usuario.findOne({where : {email} });
     if(!usuario){
-        return res.render('auth/password',{
+        return res.render('auth/forgot-password',{
             title : "¿Olvidaste tu contraseña?",
             errores: [{ msg: "El email no pertecenece a ningún usuario" }]
         });
-
     }
+
+    // Generar un token y enviar al usuario email
+    usuario.token = generarID()
+    await usuario.save()
+    // Enviar email
+    emailOlvidePassword({
+        email: usuario.email,
+        username: usuario.username,
+        token: usuario.token
+    }) 
+
+    // Renderizar 
+    res.render('templates/mensaje', {
+        title: 'Restablecer contraseña',
+        mensaje: 'Se ha enviado un email con las instrucciones'
+    })
+}
+const comprobarToken = (req, res, next) =>{
+    next();
+}
+const nuevoPassword = (req, res) =>{
+
 }
 
 export { 
@@ -135,5 +156,7 @@ export {
     registrar,
     confirmar,
     forgotPassword,
-    resetPassword
+    resetPassword,
+    comprobarToken,
+    nuevoPassword
 }
