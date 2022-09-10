@@ -153,10 +153,12 @@ const comprobarToken = async (req, res) =>{
             error: true
         })
     }
-    console.log(usuario);
+    res.render('auth/reset-password',{
+        title:'Reestablece tu contraseña'
+    });
 }
 const nuevoPassword = (req, res) =>{
-
+    console.log('Guardando...');
 }
 
 export { 
