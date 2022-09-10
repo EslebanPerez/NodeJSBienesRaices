@@ -112,14 +112,21 @@ const resetPassword = async (req, res) =>{
     // Verificar que el resultado este vacio
     if(!resultado.isEmpty()){
         return res.render('auth/password',{
-            title : "Crear cuenta",
+            title : "¿Olvidaste tu contraseña?",
             errores: resultado.array()
         });
     }
 
     //Buscar el usuario
-    
+    const { email } = req.body;
+    const usuario = await Usuario.findOne({where : {email} });
+    if(!usuario){
+        return res.render('auth/password',{
+            title : "¿Olvidaste tu contraseña?",
+            errores: [{ msg: "El email no pertecenece a ningún usuario" }]
+        });
 
+    }
 }
 
 export { 
