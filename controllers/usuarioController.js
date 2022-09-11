@@ -22,7 +22,7 @@ const registrar = async ( req, res )=>{
     let resultado = validationResult(req);
 
     console.log(resultado);
-    // Verificar que el resultado este vacio
+    // Verificar que el resultado este vacío
     if(!resultado.isEmpty()){
         return res.render('auth/registro',{
             title : "Crear cuenta",
@@ -56,7 +56,7 @@ const registrar = async ( req, res )=>{
         token: generarID(),
     });
 
-    // Envia email de confirmación
+    // Envía email de confirmación
     emailRegistro({
         username: usuario.username,
         email: usuario.email,
@@ -72,7 +72,7 @@ const registrar = async ( req, res )=>{
 
 }
 
-//Función que comprueba una cu enta
+//Función que comprueba una cuenta
 const confirmar = async (req, res) => {
     const { token } = req.params;
     //console.log( token );
@@ -109,7 +109,7 @@ const resetPassword = async (req, res) =>{
     let resultado = validationResult(req);
 
     //console.log(resultado);
-    // Verificar que el resultado este vacio
+    // Verificar que el resultado este vacío
     if(!resultado.isEmpty()){
         return res.render('auth/forgot-password',{
             title : "¿Olvidaste tu contraseña?",
@@ -123,7 +123,7 @@ const resetPassword = async (req, res) =>{
     if(!usuario){
         return res.render('auth/forgot-password',{
             title : "¿Olvidaste tu contraseña?",
-            errores: [{ msg: "El email no pertecenece a ningún usuario" }]
+            errores: [{ msg: "El email no pertenece a ningún usuario" }]
         });
     }
 
@@ -148,17 +148,20 @@ const comprobarToken = async (req, res) =>{
     const usuario = await Usuario.findOne({where: {token}});
     if(!usuario){
         return res.render('auth/confirmarCuenta',{
-            title: 'Reestablece tu contraseña',
-            mensaje: 'Hubo un error al validar tu informacion, intenta de nuevo',
+            title: 'Restablece tu contraseña',
+            mensaje: 'Hubo un error al validar tu información, intenta de nuevo',
             error: true
         })
     }
     res.render('auth/reset-password',{
-        title:'Reestablece tu contraseña'
+        title:'Restablece tu contraseña'
     });
 }
 const nuevoPassword = (req, res) =>{
     console.log('Guardando...');
+    //Validar password
+
+    //
 }
 
 export { 

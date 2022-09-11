@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended: true}))
 try{
   await db.authenticate();
   await db.sync();
-  console.log("Conexion correcta a la base de datos");
+  console.log("Conexión correcta a la base de datos");
 } catch(error){
   console.log(error);
 }
