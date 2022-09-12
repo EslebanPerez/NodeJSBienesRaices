@@ -11,7 +11,8 @@ const formularioLogin = ( req, res )=>{
 }
 const formularioRegistro = ( req, res )=>{
     res.render('auth/registro',{
-        title : "Crear cuenta"
+        title : "Crear cuenta",
+        csrfToken : req.csrfToken()
     });
 }
 const registrar = async ( req, res )=>{
@@ -42,9 +43,11 @@ const registrar = async ( req, res )=>{
         return res.render('auth/registro',{
             title : "Crear cuenta",
             errores: [{msg: 'El email ya ha sido registrado'}],
+            csrfToken : req.csrfToken(),
             usuario: {
                 username: req.body.username,
-                email: req.body.email
+                email: req.body.email,
+                csrfToken : req.csrfToken()
             }
         });
     }
