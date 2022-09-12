@@ -47,7 +47,6 @@ const registrar = async ( req, res )=>{
             usuario: {
                 username: req.body.username,
                 email: req.body.email,
-                csrfToken : req.csrfToken()
             }
         });
     }
@@ -103,7 +102,8 @@ const confirmar = async (req, res) => {
 
 const forgotPassword = ( req, res )=>{
     res.render('auth/forgot-password',{
-        title : "¿Olvidaste tu contraseña?"
+        title : "¿Olvidaste tu contraseña?",
+        csrfToken : req.csrfToken(),
     });
 }
 
@@ -116,7 +116,8 @@ const resetPassword = async (req, res) =>{
     if(!resultado.isEmpty()){
         return res.render('auth/forgot-password',{
             title : "¿Olvidaste tu contraseña?",
-            errores: resultado.array()
+            errores: resultado.array(),
+            csrfToken : req.csrfToken(),
         });
     }
 
@@ -151,6 +152,7 @@ const comprobarToken = async (req, res) =>{
     const usuario = await Usuario.findOne({where: {token}});
     if(!usuario){
         return res.render('auth/confirmarCuenta',{
+
             title: 'Restablece tu contraseña',
             mensaje: 'Hubo un error al validar tu información, intenta de nuevo',
             error: true
