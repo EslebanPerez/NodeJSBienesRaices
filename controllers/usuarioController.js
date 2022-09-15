@@ -42,6 +42,14 @@ const autenticar = async(req, res, ) =>{
     });
   }
 
+  // Comprobar si el usuario esta confirmado
+  if(!usuario.confirmado){
+    return res.render("auth/login", {
+      title: "Iniciar Sesión",
+      csrfToken: req.csrfToken(),
+      errores: [{msg:"No has confirmado tu cuenta"}],
+    });
+  }
 
 };
 
