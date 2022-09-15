@@ -10,6 +10,7 @@ const formularioLogin = (req, res) => {
     csrfToken: req.csrfToken(),
   });
 };
+
 const autenticar = async(req, res, ) =>{
   await check("email").isEmail().withMessage("El correo es obligatorio").run(req);
   await check("password")
@@ -27,6 +28,21 @@ const autenticar = async(req, res, ) =>{
       errores: resultado.array(),
     });
   }
+
+  // Comprobar si el usuario existe
+  const {email, password } = req.body;
+
+  // Comprobar si el usuario existe
+  const usuario = await Usuario.findOne({where: {email}});
+  if(!usuario){
+    return res.render("auth/login", {
+      title: "Iniciar Sesión",
+      csrfToken: req.csrfToken(),
+      errores: [{msg:"El usuario no existe"}],
+    });
+  }
+
+
 };
 
 const formularioRegistro = (req, res) => {
