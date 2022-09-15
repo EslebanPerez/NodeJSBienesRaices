@@ -7,14 +7,35 @@ import { emailRegistro, emailOlvidePassword } from "../helpers/emails.js";
 const formularioLogin = (req, res) => {
   res.render("auth/login", {
     title: "Iniciar Sesión",
+    csrfToken: req.csrfToken(),
   });
 };
+const autenticar = async(req, res, ) =>{
+  await check("email").isEmail().withMessage("El correo es obligatorio").run(req);
+  await check("password")
+    .notEmpty()
+    .withMessage("La contraseña es obligatoria")
+    .run(req);
+
+  let resultado = validationResult(req);
+
+  // Verificar que el resultado este vacío
+  if (!resultado.isEmpty()) {
+    return res.render("auth/login", {
+      title: "Iniciar Sesión",
+      csrfToken: req.csrfToken(),
+      errores: resultado.array(),
+    });
+  }
+};
+
 const formularioRegistro = (req, res) => {
   res.render("auth/registro", {
     title: "Crear cuenta",
     csrfToken: req.csrfToken(),
   });
 };
+
 const registrar = async (req, res) => {
   await check("username")
     .notEmpty()
@@ -207,7 +228,7 @@ const nuevoPassword = async (req, res) => {
   usuario.password = await bcrypt.hash( password, salt); 
   usuario.token = null;
   await usuario.save();
-  
+
   res.render('auth/confirmarCuenta',{
     title: 'Contraseña restablecida',
     mensaje: 'El password se ha guardado correctamente'
@@ -216,6 +237,7 @@ const nuevoPassword = async (req, res) => {
 
 export {
   formularioLogin,
+  autenticar,
   formularioRegistro,
   registrar,
   confirmar,
