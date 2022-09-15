@@ -51,6 +51,17 @@ const autenticar = async(req, res, ) =>{
     });
   }
 
+  // Revisar contraseña
+  if(!usuario.verificarPassword(password)){
+    return res.render("auth/login", {
+      title: "Iniciar Sesión",
+      csrfToken: req.csrfToken(),
+      usuario: {
+        email: req.body.email,
+      },
+      errores: [{msg:"La contraseña es incorrecta"}],
+    });
+  }
 };
 
 const formularioRegistro = (req, res) => {
@@ -75,6 +86,7 @@ const registrar = async (req, res) => {
     .withMessage("Las contraseñas no coinciden")
     .run(req);
   let resultado = validationResult(req);
+
   // Verificar que el resultado este vacío
   if (!resultado.isEmpty()) {
     return res.render("auth/registro", {
