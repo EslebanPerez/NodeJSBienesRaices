@@ -1,8 +1,7 @@
 import { check, validationResult } from "express-validator";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken"
 import Usuario from "../models/Usuario.js";
-import { generarID } from "../helpers/tokens.js";
+import { generarJWT, generarID } from "../helpers/tokens.js";
 import { emailRegistro, emailOlvidePassword } from "../helpers/emails.js";
 
 const formularioLogin = (req, res) => {
@@ -35,6 +34,7 @@ const autenticar = async(req, res, ) =>{
 
   // Comprobar si el usuario existe
   const usuario = await Usuario.findOne({where: {email}});
+
   if(!usuario){
     return res.render("auth/login", {
       title: "Iniciar Sesión",
@@ -68,13 +68,7 @@ const autenticar = async(req, res, ) =>{
   }
 
   // Autentificando al usuario
-  const token = jwt.sign({
-    name: 'Esleban',
-    company: 'Microsoft',
-    technology: 'JavaScript'
-  }, 'Palabrasupersecreta🤙',{
-    expiresIn: '1d'
-  });
+  const token = generarJWT({ usuarioID:usuario.id, usuarioNombre:usuario.username});
   console.log(token);
 
 };
