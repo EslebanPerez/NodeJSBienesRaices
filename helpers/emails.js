@@ -42,7 +42,7 @@ const emailOlvidePassword = async (datos) => {
         <a href="${process.env.BACKEND_URL}:${
       process.env.PORT ?? 3000
     }/auth/forgot-password/${token}"> Restablecer contraseña</a></p>
-        <p>Si no creaste esta cuenta, puedes ignorar este mensaje</p>
+        <p>Si no solicitaste cambiar contraseña, puedes ignorar este mensaje</p>
         `,
   });
 };

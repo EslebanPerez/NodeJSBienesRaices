@@ -1,5 +1,5 @@
-import { request } from "express";
 import { check, validationResult } from "express-validator";
+import bcrypt from 'bcrypt'
 import Usuario from "../models/Usuario.js";
 import { generarID } from "../helpers/tokens.js";
 import { emailRegistro, emailOlvidePassword } from "../helpers/emails.js";
@@ -30,8 +30,6 @@ const registrar = async (req, res) => {
     .withMessage("Las contraseñas no coinciden")
     .run(req);
   let resultado = validationResult(req);
-
-  console.log(resultado);
   // Verificar que el resultado este vacío
   if (!resultado.isEmpty()) {
     return res.render("auth/registro", {
@@ -44,8 +42,9 @@ const registrar = async (req, res) => {
     });
   }
 
-  //Extraer los datos
+  // Extraer los datos
   const { username, email, password } = req.body;
+
   // Verificar que el usuario no este duplicado
   const existeUsuario = await Usuario.findOne({ where: { email } });
   if (existeUsuario) {
@@ -59,6 +58,7 @@ const registrar = async (req, res) => {
       },
     });
   }
+
   //Almacenar usuario
   const usuario = await Usuario.create({
     username,
@@ -95,6 +95,7 @@ const confirmar = async (req, res) => {
       error: true,
     });
   }
+
   // Confirmar la cuenta
   usuario.token = null;
   usuario.confirmado = true;
@@ -119,6 +120,7 @@ const resetPassword = async (req, res) => {
   let resultado = validationResult(req);
 
   //console.log(resultado);
+  
   // Verificar que el resultado este vacío
   if (!resultado.isEmpty()) {
     return res.render("auth/forgot-password", {
@@ -151,9 +153,10 @@ const resetPassword = async (req, res) => {
   // Renderizar
   res.render("templates/mensaje", {
     title: "Restablecer contraseña",
-    mensaje: "Se ha enviado un email con las instrucciones",
+    mensaje: "Se ha enviado un email para restablecer tu contraseña",
   });
 };
+
 const comprobarToken = async (req, res) => {
   const { token } = req.params;
   const usuario = await Usuario.findOne({ where: { token } });
@@ -164,15 +167,51 @@ const comprobarToken = async (req, res) => {
       error: true,
     });
   }
+  // Mostrar formulario para agregar nueva contraseña
   res.render("auth/reset-password", {
     title: "Restablece tu contraseña",
+    csrfToken: req.csrfToken(),
   });
 };
-const nuevoPassword = (req, res) => {
-  console.log("Guardando...");
-  //Validar password
 
-  //
+const nuevoPassword = async (req, res) => {
+  //Validar password
+  await check("password")
+    .isLength({ min: 6 })
+    .withMessage("La contraseña debe ser de al menos 6 caracteres")
+    .run(req);
+  
+  //Verificar que el resultado no este vacío
+  let resultado = validationResult(req);
+  // Verificar que el resultado este vacío
+  if (!resultado.isEmpty()) {
+    return res.render("auth/reset-password", {
+      title: "Restablece contraseña",
+      csrfToken: req.csrfToken(),
+      errores: resultado.array(),
+      usuario: {
+        username: req.body.username,
+        email: req.body.email,
+      },
+    });
+  }
+
+  const { token } = req.params;
+  const { password } = req.body
+
+  //Quien hace el cambio
+  const usuario = await Usuario.findOne({ where:{token} })
+
+  // Hashear contraseña
+  const salt = await bcrypt.genSalt(10);
+  usuario.password = await bcrypt.hash( password, salt); 
+  usuario.token = null;
+  await usuario.save();
+  
+  res.render('auth/confirmarCuenta',{
+    title: 'Contraseña restablecida',
+    mensaje: 'El password se ha guardado correctamente'
+  })
 };
 
 export {
