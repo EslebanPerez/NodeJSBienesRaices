@@ -62,6 +62,8 @@ const autenticar = async(req, res, ) =>{
       errores: [{msg:"La contraseña es incorrecta"}],
     });
   }
+
+  // Autentificando al usuario
 };
 
 const formularioRegistro = (req, res) => {
