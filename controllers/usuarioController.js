@@ -1,5 +1,6 @@
 import { check, validationResult } from "express-validator";
-import bcrypt from 'bcrypt'
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken"
 import Usuario from "../models/Usuario.js";
 import { generarID } from "../helpers/tokens.js";
 import { emailRegistro, emailOlvidePassword } from "../helpers/emails.js";
@@ -38,6 +39,9 @@ const autenticar = async(req, res, ) =>{
     return res.render("auth/login", {
       title: "Iniciar Sesión",
       csrfToken: req.csrfToken(),
+      usuario: {
+        email: req.body.email,
+      },
       errores: [{msg:"El usuario no existe"}],
     });
   }
@@ -64,6 +68,15 @@ const autenticar = async(req, res, ) =>{
   }
 
   // Autentificando al usuario
+  const token = jwt.sign({
+    name: 'Esleban',
+    company: 'Microsoft',
+    technology: 'JavaScript'
+  }, 'Palabrasupersecreta🤙',{
+    expiresIn: '1d'
+  });
+  console.log(token);
+
 };
 
 const formularioRegistro = (req, res) => {
@@ -158,7 +171,7 @@ const confirmar = async (req, res) => {
   // Confirmar la cuenta
   usuario.token = null;
   usuario.confirmado = true;
-  console.log(usuario);
+  //console.log(usuario);
   await usuario.save();
 
   return res.render("auth/confirmarCuenta", {
