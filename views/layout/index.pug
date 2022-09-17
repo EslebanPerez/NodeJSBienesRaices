@@ -7,6 +7,9 @@ html(lang="en")
         title Bienes Raíces | #{title}
         link(rel="stylesheet", href="/css/app.css")
     body.min-h-screen.bg-gray-50
+        if barra
+            include header
+        
         main(class = " mx-auto container px-2 ")
             // This is the block that will be rendered by the pug template
             block contenido 
