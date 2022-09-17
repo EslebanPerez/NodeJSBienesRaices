@@ -1,8 +1,9 @@
 import express from "express";
 import csrf from "csurf";
 import cookieParser from "cookie-parser";
-import usuarioRoutes from "./routes/usuarioRoutes.js"
-import db from "./config/db.js"
+import usuarioRoutes from "./routes/usuarioRoutes.js";
+import propiedadesRoutes from "./routes/propiedadesRoutes.js";
+import db from "./config/db.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -33,6 +34,7 @@ app.use(express.static('public'))
 
 //Routing
 app.use('/auth', usuarioRoutes);
+app.use('/', propiedadesRoutes);
 
 app.listen(port, () => {
   console.log("Server listening on port " + port);
