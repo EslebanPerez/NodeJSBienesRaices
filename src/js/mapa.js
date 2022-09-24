@@ -13,6 +13,14 @@
         draggable: true,
         autoPan: true
     })
-    .addTo(mapa)
+    .addTo(mapa);
+
+    // Detectar movimiento de Pin
+    marker.on('moveend', function(e){
+        marker = e.target
+        const position = marker.getLatLng()
+        console.log(position);
+        mapa.panTo(new L.LatLng(position.lat, position.lng))
+    })
 
 })()
