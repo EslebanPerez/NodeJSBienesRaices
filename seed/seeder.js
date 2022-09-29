@@ -1,9 +1,9 @@
 import { exit } from 'node:process'
 import categorias from './categorias.js'
-import categoria from '../models/Categoria.js'
+import Categoria from '../models/Categoria.js'
 import db from '../config/db.js'
 
-const impotarDatos = async () => {
+const importarDatos = async () => {
     try {
         // Autenticar
         await db.autenticate;
@@ -21,4 +21,8 @@ const impotarDatos = async () => {
         //process.exit(1);
         exit(1);
     }
+}
+
+if(process.argv[2] == "-i"){
+    importarDatos();
 }
