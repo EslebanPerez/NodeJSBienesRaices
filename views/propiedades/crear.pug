@@ -27,10 +27,14 @@ block contenido
                             label(for="category",class = "block text-sm text-gray-700 uppercase font-bold mb-1 " ) Categoría
                             select(name="category" class="category w-full px-3 py-3 text-gray-400 border-md rounded-lg shadow focus:outline-1 focus:outline-lime-200 focus:shadow-outline")
                                 option(value="") - Selecciona -
+                                each categoria in categorias 
+                                    option(value=categoria.id)=categoria.nombre
                         div(class="md:w-1/2")        
                             label(for="price",class = "block text-sm text-gray-700 uppercase font-bold mb-1 " ) Precio
                             select(name="price" class=" price w-full px-3 py-3 text-gray-400 border-md rounded-lg shadow focus:outline-1 focus:outline-lime-200 focus:shadow-outline")
                                 option(value="") - Selecciona -
+                                each precio in precios
+                                    option(value=precio.id)=precio.nombre
 
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")   
                         div(class="md:w-1/3")          
