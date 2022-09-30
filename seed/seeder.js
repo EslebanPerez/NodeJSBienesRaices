@@ -30,10 +30,7 @@ const importarDatos = async () => {
 
 const eliminarDatos = async () => {
     try {
-        await Promise.all([
-            Categoria.destroy({where:{}, truncate:true}),
-            Precio.destroy({where:{}, truncate:true})
-        ]);
+        await db.sync({force: true})
         console.log("Datos eliminados correctamente");
         exit();
     } catch (error) {
