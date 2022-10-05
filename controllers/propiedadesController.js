@@ -1,3 +1,4 @@
+import { validationResult } from "express-validator";
 import Precio from "../models/Precio.js";
 import Categoria from "../models/Categoria.js";
 
@@ -19,9 +20,34 @@ const crear = async(req, res) => {
   res.render("propiedades/crear", {
     title: 'Crear nueva propiedad',
     barra: true,
+    csrfToken: req.csrfToken(),
     categorias,
     precios
   });
 }
 
-export { admin, crear };
+const guardar = async(req, res) => {
+  // Resultado de validación
+  let resultado = validationResult(req);
+  if(!resultado.isEmpty()){
+    
+    // Consultar modelo de Precios y Categorías
+    const [categorias, precios] = await Promise.all([
+      Categoria.findAll(),
+      Precio.findAll()
+  ])
+
+  return res.render("propiedades/crear", {
+    title: 'Crear nueva propiedad',
+    barra: true,
+    csrfToken: req.csrfToken(),
+    categorias,
+    precios,
+    errores: resultado.array()
+  });
+
+  }
+  console.log('Guardando');
+}
+
+export { admin, crear, guardar };

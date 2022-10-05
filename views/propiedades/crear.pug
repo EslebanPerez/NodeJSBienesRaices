@@ -8,9 +8,14 @@ block contenido
         h1.text-4xl.my-5.font-extrabold.text-center Bienes 
             span.font-normal Raíces
         h2.text-center.text-2xl.font-extrabold=title
+        if errores 
+            div(class="max-w-md mx-auto my-10")
+                each error in errores 
+                    p.bg-red-500.text-white.uppercase.text-xs.text-center.p-2.mb-1.font-bold= error.msg
 
         div(class="bg-white shadow py-8 px-4 rounded mx-auto max-w-4xl my-4 md:px-10")
-            form.space-y-4(action="") 
+            form.space-y-4(method="POST" action="/propiedades/crear")
+                input(type="hidden" name="_csrf" value=csrfToken)
                 div(class='space-y-4')
                     div
                         h3.text-lg.leading-6.font-medium.text-gray-900 Información general
@@ -71,6 +76,7 @@ block contenido
                         input(type="hidden", name="calle", id="calle")
                         input(type="hidden", name="lat", id="lat")
                         input(type="hidden", name="lng", id="lng")
+                    input(type="submit" value="Añadir imagen" class="w-full py-3 bg-lime-400 rounded-md hover:bg-lime-600 text-zinc-900 font-bold uppercase cursor-pointer")
 
 block scripts 
     script(src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js")
