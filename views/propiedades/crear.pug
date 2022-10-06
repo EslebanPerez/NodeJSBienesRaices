@@ -71,11 +71,11 @@ block contenido
                         #mapa.h-96
 
                         div 
-                            p.calle
+                            p.calle= datos.calle ? datos.calle : ''
 
-                        input(type="hidden", name="calle", id="calle")
-                        input(type="hidden", name="lat", id="lat")
-                        input(type="hidden", name="lng", id="lng")
+                        input(type="hidden", name="calle", id="calle" value= datos.calle ? datos.calle : '')
+                        input(type="hidden", name="lat", id="lat" value= datos.lat ? datos.lat : '')
+                        input(type="hidden", name="lng", id="lng" value= datos.lng ? datos.lng : '')
                     input(type="submit" value="Añadir imagen" class="w-full py-3 bg-lime-400 rounded-md hover:bg-lime-600 text-zinc-900 font-bold uppercase cursor-pointer")
 
 block scripts 

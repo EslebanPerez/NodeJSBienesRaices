@@ -47,9 +47,7 @@ const guardar = async(req, res) => {
     errores: resultado.array(),
     datos: req.body
   });
-
   }
-  console.log('Guardando');
 }
 
 export { admin, crear, guardar };
