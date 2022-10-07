@@ -11,7 +11,7 @@ const protegerRuta = async (req, res, next) => {
     // Comprobar el token
     try {
         const decoded = jwt.verify(_token, process.env.JWT_SECRET)
-        const usuario = await Usuario.findByPk(decoded.id)     
+        const usuario = await Usuario.scope('eliminarPassword').findByPk(decoded.id)     
         console.log(usuario);
     } catch (error) {
         return res.clearCookie('_token').redirect('/auth/login');
