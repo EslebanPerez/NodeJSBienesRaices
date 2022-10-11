@@ -2,8 +2,7 @@ import { validationResult } from "express-validator";
 import {Precio, Categoria, Propiedad} from '../models/index.js'
 const admin = (req, res) => {
   res.render("propiedades/admin", {
-    title: 'Mis propiedades',
-    barra: true
+    title: 'Mis propiedades'
   });
 };
 
@@ -17,7 +16,6 @@ const crear = async(req, res) => {
 
   res.render("propiedades/crear", {
     title: 'Crear nueva propiedad',
-    barra: true,
     csrfToken: req.csrfToken(),
     categorias,
     precios,
@@ -38,7 +36,6 @@ const guardar = async(req, res) => {
 
   return res.render("propiedades/crear", {
     title: 'Crear nueva propiedad',
-    barra: true,
     csrfToken: req.csrfToken(),
     categorias,
     precios,
@@ -73,4 +70,10 @@ const guardar = async(req, res) => {
   }
 }
 
-export { admin, crear, guardar };
+const agregarImagen= async (req, res) =>{
+  res.render('propiedades/agregar-imagen',{
+    title: 'Agregar Imagen'
+  })
+}
+
+export { admin, crear, guardar, agregarImagen };
