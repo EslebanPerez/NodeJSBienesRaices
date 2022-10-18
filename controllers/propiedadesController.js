@@ -71,6 +71,19 @@ const guardar = async(req, res) => {
 }
 
 const agregarImagen= async (req, res) =>{
+
+  const { id } = req.params;
+
+  // Validar que la propiedad exista
+  const propiedad = await Propiedad.findByPk(id);
+  if(!propiedad){
+    return res.redirect('/mis-propiedades');
+  }
+
+  // Validar que la propiedad no este publicada
+
+  // Validad que la propiedad pertenece a quien visita esta página
+
   res.render('propiedades/agregar-imagen',{
     title: 'Agregar Imagen'
   })
