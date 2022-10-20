@@ -94,7 +94,8 @@ const agregarImagen= async (req, res) =>{
 
 
   res.render('propiedades/agregar-imagen',{
-    title: 'Agregar Imagen'
+    title: `Agregar Imagen ${propiedad.titulo}`,
+    propiedad
   })
 }
 
