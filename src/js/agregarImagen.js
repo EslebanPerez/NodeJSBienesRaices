@@ -8,12 +8,25 @@ Dropzone.options.imagen = {
     maxFilesize: 5,
     maxFiles: 1,
     paralleUploads: 1,
-    autoProcessQueue: true,
+    autoProcessQueue: false,
     addRemoveLinks: true,
     dictRemoveFile: 'Borrar Archivo',
     dictMaxFilesExceeded: 'El limite es 1 archivo' ,
     headers:{
         'CSRF-Token': token
     },
-    paramName: 'imagen'
+    paramName: 'imagen',
+    init: function(){
+        const dropzone = this
+        const btnPublicar = document.querySelector('#publicar')
+
+        btnPublicar.addEventListener('click', function(){
+            dropzone.processQueue()
+        })
+        dropzone.on('queuecomplete', function(){
+            if(dropzone.getActiveFiles().length == 0){
+                window.location.href = '/mis-propiedades'
+            }
+        })
+    }
 }

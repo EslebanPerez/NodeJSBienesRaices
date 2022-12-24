@@ -100,7 +100,7 @@ const agregarImagen= async (req, res) =>{
   })
 }
 
-const almacenarImagen = async(req, res) => {
+const almacenarImagen = async(req, res, next) => {
   const { id } = req.params;
 
   // Validar que la propiedad exista
@@ -135,7 +135,7 @@ const almacenarImagen = async(req, res) => {
     propiedad.publicado = 1
 
     await propiedad.save()
-
+    next();
   } catch (error) {
     console.log(error);
   }
