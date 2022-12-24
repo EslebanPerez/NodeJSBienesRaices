@@ -8,7 +8,7 @@ Dropzone.options.imagen = {
     maxFilesize: 5,
     maxFiles: 1,
     paralleUploads: 1,
-    autoProcessQueue: false,
+    autoProcessQueue: true,
     addRemoveLinks: true,
     dictRemoveFile: 'Borrar Archivo',
     dictMaxFilesExceeded: 'El limite es 1 archivo' ,
