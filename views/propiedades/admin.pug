@@ -7,3 +7,5 @@ block contenido
         h2.text-center.text-2xl.font-extrabold=title
 
         a(href="/propiedades/crear" class="rounded py-2 px-10 bg-lime-300 hover:bg-lime-500 text-sm font-bold text-center text-zinc-900 uppercase my-5 inline-block w-full sm:w-auto") Crear propiedad
+
+        pre= JSON.stringify(propiedades,undefined, 2)
