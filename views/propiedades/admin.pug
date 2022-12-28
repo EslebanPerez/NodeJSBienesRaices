@@ -28,6 +28,8 @@ block contenido
 
                                         =propiedad.precio.nombre
 
-                                div(class="sm:w-1/4 md:w=2/6 lg:w-1/6") 
+                                div(class="sm:w-1/4 md:w=2/6 lg:w-1/6")
+                                    form(action="#")
+                                        input(type="submit", class=`px-2 py-2 md:py-1 text-xs leading-5 font-semibold rounded cursor-pointer ${propiedad.publicado ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }` value=`${propiedad.publicado ? 'Publicado' : 'No publicado' }`)
         else
             p.text-center No hay propiedades
