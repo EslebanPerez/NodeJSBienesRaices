@@ -1,6 +1,6 @@
 import express from "express";
 import { body } from "express-validator"
-import { admin, crear, guardar, agregarImagen, almacenarImagen } from "../controllers/propiedadesController.js"
+import { admin, crear, guardar, agregarImagen, almacenarImagen, editar } from "../controllers/propiedadesController.js"
 import protegerRuta from "../middleware/protegerRuta.js";
 import upload from "../middleware/subirImagen.js";
 
@@ -22,5 +22,6 @@ router.post('/propiedades/crear', protegerRuta,
 );
 router.get('/propiedades/agregar-imagen/:id', protegerRuta, agregarImagen)
 router.post('/propiedades/agregar-imagen/:id', protegerRuta, upload.single('imagen'), almacenarImagen)
+router.get('/propiedades/editar/:id', protegerRuta, editar)
 
 export default router;

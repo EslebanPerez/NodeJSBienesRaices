@@ -150,4 +150,20 @@ const almacenarImagen = async(req, res, next) => {
   }
 }
 
-export { admin, crear, guardar, agregarImagen, almacenarImagen };
+const editar = async(req, res, ) => {
+   // Consultar modelo de Precios y Categorías
+   const [categorias, precios] = await Promise.all([
+    Categoria.findAll(),
+    Precio.findAll()
+  ])
+
+  res.render("propiedades/editar", {
+    title: 'Editar propiedad',
+    csrfToken: req.csrfToken(),
+    categorias,
+    precios,
+    datos: {}
+  });
+}
+
+export { admin, crear, guardar, agregarImagen, almacenarImagen, editar };
