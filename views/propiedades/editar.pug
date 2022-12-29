@@ -33,13 +33,13 @@ block contenido
                             select(name="categoria" class="categoria w-full px-3 py-3 text-gray-400 border-md rounded-lg shadow focus:outline-1 focus:outline-lime-200 focus:shadow-outline")
                                 option(value="" ) - Selecciona -
                                 each categoria in categorias 
-                                    option(value=categoria.id selected= datos.categoria ? datos.categoria == categoria.id ? true : false : null)=categoria.nombre
+                                    option(value=categoria.id selected= datos.categoriaId ? datos.categoriaId == categoria.id ? true : false : null)=categoria.nombre
                         div(class="md:w-1/2")        
                             label(for="precio",class = "block text-sm text-gray-700 uppercase font-bold mb-1 " ) Precio
                             select(name="precio" class=" precio w-full px-3 py-3 text-gray-400 border-md rounded-lg shadow focus:outline-1 focus:outline-lime-200 focus:shadow-outline")
                                 option(value="") - Selecciona -
                                 each precio in precios
-                                    option(value=precio.id selected= datos.precio ? datos.precio == precio.id ? true : false : null)=precio.nombre
+                                    option(value=precio.id selected= datos.precioId ? datos.precioId == precio.id ? true : false : null)=precio.nombre
 
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")   
                         div(class="md:w-1/3")          
@@ -53,7 +53,7 @@ block contenido
                         div(class="md:w-1/3")        
                             label(for="estacionamientos",class = "block text-sm text-gray-700 uppercase font-bold mb-1 " ) Estacionamientos
                             select(name="estacionamientos" class="estacionamientos w-full px-3 py-3 text-gray-400 border-md rounded-lg shadow focus:outline-1 focus:outline-lime-200 focus:shadow-outline")
-                                option(value="") - Selecciona -
+                                option(value=datos.estacionamientos) - Selecciona -
                                 - var n = 1;
                                     while n <= 4
                                         option(value=n selected= datos.estacionamientos ? datos.estacionamientos == n ? true : false : null) #{n++}
@@ -76,7 +76,7 @@ block contenido
                         input(type="hidden", name="calle", id="calle" value= datos.calle ? datos.calle : '')
                         input(type="hidden", name="lat", id="lat" value= datos.lat ? datos.lat : '')
                         input(type="hidden", name="lng", id="lng" value= datos.lng ? datos.lng : '')
-                    input(type="submit" value="Añadir imagen" class="w-full py-3 bg-lime-400 rounded-md hover:bg-lime-600 text-zinc-900 font-bold uppercase cursor-pointer")
+                    input(type="submit" value="Guardar Cambios" class="w-full py-3 bg-lime-400 rounded-md hover:bg-lime-600 text-zinc-900 font-bold uppercase cursor-pointer")
 
 block scripts 
     script(src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js")
