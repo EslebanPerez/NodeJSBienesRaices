@@ -920,6 +920,10 @@ video {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
+.hover\:text-lime-600:hover {
+  --tw-text-opacity: 1;
+  color: rgb(101 163 13 / var(--tw-text-opacity));
+}
 .focus\:bg-lime-50:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(247 254 231 / var(--tw-bg-opacity));

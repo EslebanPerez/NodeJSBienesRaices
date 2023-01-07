@@ -253,7 +253,11 @@ const eliminar = async (req, res) => {
   await propiedad.destroy();
   return res.redirect('/mis-propiedades')
 
-
 }
 
-export { admin, crear, guardar, agregarImagen, almacenarImagen, editar, guardarCambios, eliminar };
+// Mostrar una propiedad
+const mostrarPropiedad = async (req, res)=>{
+  res.render('propiedades/mostrar')
+}
+
+export { admin, crear, guardar, agregarImagen, almacenarImagen, editar, guardarCambios, eliminar, mostrarPropiedad };
