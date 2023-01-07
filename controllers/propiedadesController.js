@@ -12,6 +12,7 @@ const admin = async (req, res) => {
   res.render("propiedades/admin", {
     title: 'Mis propiedades',
     propiedades,
+    csrfToken: req.csrfToken(),
   });
 };
 
@@ -228,5 +229,8 @@ const guardarCambios = async(req, res) => {
     console.log(error);
   }
 }
+const eliminar = async (req, res) => {
+  console.log("Eliminando");
+}
 
-export { admin, crear, guardar, agregarImagen, almacenarImagen, editar, guardarCambios };
+export { admin, crear, guardar, agregarImagen, almacenarImagen, editar, guardarCambios, eliminar };
