@@ -2,6 +2,10 @@ import { unlink } from 'node:fs/promises'
 import { validationResult } from "express-validator";
 import {Precio, Categoria, Propiedad} from '../models/index.js'
 const admin = async (req, res) => {
+  
+  // Leer queryString
+  console.log(req.query);
+
   const { id } = req.usuario
   console.log(id);
   const propiedades = await Propiedad.findAll({
