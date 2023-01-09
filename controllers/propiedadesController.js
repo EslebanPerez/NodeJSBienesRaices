@@ -2,12 +2,18 @@ import { unlink } from 'node:fs/promises'
 import { validationResult } from "express-validator";
 import {Precio, Categoria, Propiedad} from '../models/index.js'
 const admin = async (req, res) => {
-  
+
   // Leer queryString
-  console.log(req.query);
+  const { pagina: paginaActual } = req.query;
+
+  console.log(paginaActual);
+
+  const expresion = /[0-9]/
+  if(!expresion.test(paginaActual)){
+    return res.redirect('/mis-propiedades?pagina=1')
+  }
 
   const { id } = req.usuario
-  console.log(id);
   const propiedades = await Propiedad.findAll({
     where: {
       usuarioId: id
