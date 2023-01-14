@@ -1,5 +1,7 @@
 const inicio = (req, res) => {
-  res.send("Hola")
+  res.render('inicio',{
+    title: 'Inicio'
+  })
 }
 
 const categoria = (req, res) => {
