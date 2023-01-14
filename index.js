@@ -3,6 +3,7 @@ import csrf from "csurf";
 import cookieParser from "cookie-parser";
 import usuarioRoutes from "./routes/usuarioRoutes.js";
 import propiedadesRoutes from "./routes/propiedadesRoutes.js";
+import appRouters from "./routes/appRouters.js";
 import db from "./config/db.js";
 
 const app = express();
@@ -33,6 +34,7 @@ app.set("views", "./views");
 app.use(express.static('public'))
 
 //Routing
+app.use('/', appRouters)
 app.use('/auth', usuarioRoutes);
 app.use('/', propiedadesRoutes);
 
