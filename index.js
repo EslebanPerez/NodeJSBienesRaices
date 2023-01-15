@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import usuarioRoutes from "./routes/usuarioRoutes.js";
 import propiedadesRoutes from "./routes/propiedadesRoutes.js";
 import appRouters from "./routes/appRouters.js";
+import apiRoutes from "./routes/apiRoutes.js";
 import db from "./config/db.js";
 
 const app = express();
@@ -37,6 +38,7 @@ app.use(express.static('public'))
 app.use('/', appRouters)
 app.use('/auth', usuarioRoutes);
 app.use('/', propiedadesRoutes);
+app.use('/api', apiRoutes)
 
 app.listen(port, () => {
   console.log("Server listening on port " + port);
