@@ -30,7 +30,13 @@
       const marker = new L.marker([propiedad?.lat, propiedad?.lng], {
         autoPan: true
       }).addTo(mapa)
-      .bindPopup('Información aquí')
+      .bindPopup(`
+        <p class="text-lime-600 font-bold ">${propiedad.categoria.nombre}</p>
+        <h1 class="text-xl font-extrabold uppercase my-4">${propiedad.titulo}</h1>
+        <img src='uploads/${propiedad.image}' alt='${propiedad.titulo}'>
+        <p class="text-gray-600 font-bold">${propiedad.precio.nombre}</p>
+        <a href="/propiedad/${propiedad.id}" class=" bg-lime-400 block p-2 text-center font-bold uppercase text-white">Ver propiedad</a>
+      `)
 
       markers.addLayer(marker)
     });
