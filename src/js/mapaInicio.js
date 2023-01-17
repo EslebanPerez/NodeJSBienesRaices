@@ -48,7 +48,8 @@
   }
 
   const mostrarPropiedades = propiedades => {
-    //console.log(propiedades);
+    // Limpiar los markers previos
+    markers.clearLayers()
 
     propiedades.forEach(propiedad => {
       // Agregando todos los pines
@@ -69,7 +70,7 @@
 
   const filtrarPropiedades=()=>{
     const resultado = propiedades.filter(filtrarCategoria).filter(filtrarPrecio)
-    console.log(resultado);
+    mostrarPropiedades(resultado);
   }
 
   const filtrarCategoria = propiedad => filtros.categoria ? propiedad.categoriaId === filtros.categoria : propiedad
