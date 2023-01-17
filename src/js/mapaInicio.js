@@ -5,6 +5,8 @@
 
   let markers = new L.FeatureGroup().addTo(mapa)
 
+  let propiedades = [];
+
   // Filtros
   const filtros = {
     categoria: '',
@@ -21,12 +23,14 @@
   // Filtrado de categorías y precios
   categoriasSelect.addEventListener('change', e => {
     console.log(+e.target.value);
-    filtros.categoria = +e.target.value
+    filtros.categoria = +e.target.value;
+    filtrarPropiedades();
   })
   
   preciosSelect.addEventListener('change', e => {
     console.log(+e.target.value);
     filtros.precio = +e.target.value
+    filtrarPropiedades();
   })
 
 
@@ -34,7 +38,7 @@
     try {
       const url = '/api/propiedades';
       const respuesta = await fetch(url);
-      const propiedades = await respuesta.json();
+       propiedades = await respuesta.json();
 
       mostrarPropiedades(propiedades);
 
@@ -62,6 +66,13 @@
       markers.addLayer(marker)
     });
   }
+
+  const filtrarPropiedades=()=>{
+    const resultado = propiedades.filter(filtrarCategoria  )
+    console.log(resultado);
+  }
+
+  const filtrarCategoria = propiedad => filtros.categoria ? propiedad.categoriaId === filtros.categoria : propiedad
 
   obtenerPropiedades()
 
