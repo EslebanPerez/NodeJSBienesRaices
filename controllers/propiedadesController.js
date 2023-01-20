@@ -292,6 +292,8 @@ const eliminar = async (req, res) => {
 // Mostrar una propiedad
 const mostrarPropiedad = async (req, res)=>{
   const { id } = req.params
+  
+  console.log(req.usuario)
 
   // Comprobar que la propiedad exista
   const propiedad = await Propiedad.findByPk(id, {

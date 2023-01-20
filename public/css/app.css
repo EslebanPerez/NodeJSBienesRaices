@@ -569,6 +569,9 @@ video {
 .mt-5 {
   margin-top: 1.25rem;
 }
+.mt-14 {
+  margin-top: 3.5rem;
+}
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -580,9 +583,6 @@ video {
 }
 .ml-2 {
   margin-left: 0.5rem;
-}
-.mt-14 {
-  margin-top: 3.5rem;
 }
 .block {
   display: block;
@@ -670,11 +670,11 @@ video {
 .gap-2 {
   gap: 0.5rem;
 }
-.gap-8 {
-  gap: 2rem;
-}
 .gap-5 {
   gap: 1.25rem;
+}
+.gap-8 {
+  gap: 2rem;
 }
 .space-y-5 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
@@ -803,14 +803,14 @@ video {
   -o-object-fit: cover;
      object-fit: cover;
 }
+.p-5 {
+  padding: 1.25rem;
+}
 .p-2 {
   padding: 0.5rem;
 }
 .p-6 {
   padding: 1.5rem;
-}
-.p-5 {
-  padding: 1.25rem;
 }
 .py-5 {
   padding-top: 1.25rem;
@@ -881,10 +881,6 @@ video {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-.text-9xl {
-  font-size: 8rem;
-  line-height: 1;
 }
 .font-extrabold {
   font-weight: 800;
