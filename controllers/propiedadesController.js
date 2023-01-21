@@ -1,6 +1,7 @@
 import { unlink } from 'node:fs/promises'
 import { validationResult } from "express-validator";
 import {Precio, Categoria, Propiedad} from '../models/index.js'
+import { esVendedor } from '../helpers/index.js';
 const admin = async (req, res) => {
 
   // Leer queryString
@@ -305,7 +306,8 @@ const mostrarPropiedad = async (req, res)=>{
   res.render('propiedades/mostrar', {
     propiedad,
     pagina: propiedad.titulo,
-    usuario: req.usuario
+    usuario: req.usuario,
+    esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId )
   })
 }
 
