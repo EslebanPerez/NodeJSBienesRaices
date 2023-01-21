@@ -305,7 +305,7 @@ const mostrarPropiedad = async (req, res)=>{
   }
   res.render('propiedades/mostrar', {
     propiedad,
-    pagina: propiedad.titulo,
+    title: propiedad.titulo,
     usuario: req.usuario,
     esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId )
   })
