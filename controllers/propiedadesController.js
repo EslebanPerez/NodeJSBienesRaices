@@ -1,6 +1,6 @@
 import { unlink } from 'node:fs/promises'
 import { validationResult } from "express-validator";
-import {Precio, Categoria, Propiedad} from '../models/index.js'
+import {Precio, Categoria, Propiedad, Mensaje} from '../models/index.js'
 import { esVendedor } from '../helpers/index.js';
 const admin = async (req, res) => {
 
@@ -335,6 +335,29 @@ const enviarMensaje = async (req, res) =>{
       errores: resultado.array()
     })
   }
+  console.log(req.params)
+  console.log(req.body)
+  console.log(req.usuario)
+
+  const {mensaje} = req.body
+  const {id: propiedadId} = req.params
+  const {id: usuarioId} = req.usuario
+
+   await Mensaje.create({
+    mensaje,
+    propiedadId,
+    usuarioId
+   })
+  res.redirect(`${process.env.BACKEND_URL}:${process.env.PORT}/propiedad/${propiedadId}`) 
+
+  /*return res.render('propiedades/mostrar', {
+    propiedad,
+    title: propiedad.titulo,
+    csrfToken: req.csrfToken(),
+    usuario: req.usuario,
+    esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId ),
+    enviado: true
+  })*/
 }
 
 export { admin, crear, guardar, agregarImagen, almacenarImagen, editar, guardarCambios, eliminar, mostrarPropiedad, enviarMensaje};

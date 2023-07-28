@@ -48,7 +48,9 @@ block contenido
             span(id="calle" class="text-gray-800 block text-lg")= propiedad.calle
           if !esVendedor
             h3(class="text-2xl text-center my-10 font-bold text-gray-900") Vendedor
-            if usuario
+            if enviado 
+              p(class="p-2 text-center bg-green-100 text-green-600 uppercase font-bold") Mensaje enviado
+            else if usuario
               if errores 
                 div(class="max-w-md mx-auto my-10")
                     each error in errores 
@@ -57,10 +59,9 @@ block contenido
               form(method="POST")
                 input(type="hidden" name="_csrf" value=csrfToken)
                 
-
                 div(class="space-y-5")
                   label(for="mensaje") Mensaje:
-                  textarea(id="mensaje" name="mensaje" placeholder="Escribe un mensaje al vendedor" class="w-full py-2  border border-gray-300 rounded-lg shadow placeholder-gray-500"  )
+                  textarea(id="mensaje" name="mensaje" placeholder="Escribe un mensaje al vendedor" class="w-full p-2  border border-gray-300 rounded-lg shadow placeholder-gray-500 place"  )
                   input(type="submit" value="Enviar mensaje" class="rounded-md bg-lime-500 text-zinc-900 font-bold uppercase text-sm w-full p-2 cursor-pointer text-center"  )
             else
               div(class="flex justify-center gap-2 flex-col items-center")

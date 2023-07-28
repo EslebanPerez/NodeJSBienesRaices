@@ -865,6 +865,9 @@ video {
 .pt-10 {
   padding-top: 2.5rem;
 }
+.pl-\[14px\] {
+  padding-left: 14px;
+}
 .text-center {
   text-align: center;
 }
@@ -986,6 +989,10 @@ video {
 .text-lime-600 {
   --tw-text-opacity: 1;
   color: rgb(101 163 13 / var(--tw-text-opacity));
+}
+.text-green-600 {
+  --tw-text-opacity: 1;
+  color: rgb(22 163 74 / var(--tw-text-opacity));
 }
 .placeholder-gray-500::-moz-placeholder {
   --tw-placeholder-opacity: 1;
